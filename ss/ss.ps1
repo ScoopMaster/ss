@@ -77,7 +77,7 @@ function ss {
 
     # PREFILTER USING SWISS-CHEESE METHOD
     if ($oLast) {
-        $csv = if ($oldPS) { $csv | Select-String "okibcn/ScoopMaster" } else { $csv | Select-String "okibcn/ScoopMaster" -raw }
+        $csv = if ($oldPS) { $csv | Select-String "ScoopMaster/ScoopMaster" } else { $csv | Select-String "ScoopMaster/ScoopMaster" -raw }
     }
     if ($oOfficial) {
         $csv = if ($oldPS) { $csv | Select-String "Scoopinstaller/" } else { $csv | Select-String '"Scoopinstaller/' -raw }
@@ -146,7 +146,7 @@ function ss {
     Foreach ($line in $table) {
         $BucketURL = $line.Bucket
         $line.Bucket = $line.Bucket -Replace "(^.*/ScoopInstaller/.*)", "$cOfficial`$1$cNormal"
-        $line.Bucket = $line.Bucket -Replace "(^.*/okibcn/ScoopMaster)", "$cSMaster`$1$cNormal"
+        $line.Bucket = $line.Bucket -Replace "(^.*/ScoopMaster/ScoopMaster)", "$cSMaster`$1$cNormal"
         if ( $hLocalBuckets.count -AND $hLocalBuckets[$BucketURL] ) {
             $line.Bucket = $line.Bucket -Replace $BucketURL, $hLocalBuckets[$BucketURL]
         }
